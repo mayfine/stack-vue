@@ -80,4 +80,4 @@ export default function dymamicComponentWithLoading (syncComponentLoad, loadingC
 }
 ```
 
-想到一点更新一点，实时纪录自己的一些想法与改进，希望达到预期，越来越好，不对的地方或者有好的建议欢迎留言告诉我！
+想到一点更新一点，实时纪录自己的一些想法与改进，希望达到预期，越来越好，不对的地方或者有好的建议欢迎留言告诉我哦！

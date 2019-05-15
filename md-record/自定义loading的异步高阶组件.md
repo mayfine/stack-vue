@@ -8,7 +8,8 @@
 ## 实现方式 (持续review更新中)
 
 >代码目录：/stack-vue/my-app-demo/src/demo/HOC
-本地路由：localhost:8080/#/HOC
+
+>本地路由：localhost:8080/#/HOC
 
 
 ```javascript

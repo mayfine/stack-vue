@@ -10,6 +10,11 @@ export default new Router({
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
+    },
+    {
+      path: '/HOC',
+      name: 'HOC',
+      component: () => import('@/demo/HOC/hoc.vue')
     }
   ]
 })

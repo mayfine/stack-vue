@@ -15,6 +15,11 @@ export default new Router({
       path: '/HOC',
       name: 'HOC',
       component: () => import('@/demo/HOC/hoc.vue')
+    },
+    {
+      path: '/async-tab-switcher',
+      name: 'async-tab-switcher',
+      component: () => import('@/demo/async-tab-switcher/index.vue')
     }
   ]
 })

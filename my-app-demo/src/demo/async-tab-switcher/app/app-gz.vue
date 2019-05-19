@@ -4,6 +4,11 @@
 
         <p>props: {{ a }}</p>
 
+        <p>
+            slot: 
+            <slot name="content-gz">a default</slot>
+        </p>
+
         <div>
             <button @click="$emit('tab1Click', 'tab1 click...')">tab1 btn</button>
         </div>

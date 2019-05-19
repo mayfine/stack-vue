@@ -8,11 +8,19 @@
         </ul>
 
         <div class="tab-item" v-for="item in availableTabItem" :key="`content_${item.id}`" v-show="isActive(item.id)">
+
+            <!-- 透传异步组件的属性及事件绑定 -->
             <component 
                 :is="item.dynamicComponent" 
                 v-bind="item.props"
                 v-on="item.on"
-                v-if="item.dynamicComponent"></component>
+                v-if="item.dynamicComponent">
+
+                <div :slot="slotName" v-for="slotName in item.slot" :key="slotName">
+                    <slot :name="slotName"></slot>
+                </div>
+
+            </component>
 
             <!-- 可扩展支持自定义loading -->
             <div class="loading" v-else >{{ item.id }}_loading...</div>
@@ -23,7 +31,7 @@
 <script>
 export default {
     props: {
-        tabItem: {
+        tabConfig: {
             type: Array,
             default: () => []
         }
@@ -42,8 +50,8 @@ export default {
 
     methods: {
         init () {
-            // 可以新增一些过滤规则将不合规的tab过滤掉，略
-            this.availableTabItem = this.tabItem.filter((item, index) => item);
+            // 可以新增一些过滤规则将不合规的tab过滤掉，或初始化不合规范的类型定义
+            this.availableTabItem = this.tabConfig.filter((item, index) => item);
 
             if (!this.availableTabItem.length) {
                 return;
@@ -61,30 +69,34 @@ export default {
          * initActiveTab
          */
         initActiveTab (id) {
+            let activeTabIndex = 0;
+
             this.availableTabItem.some((item, index) => {
                 if (item.id === id) {
+                    activeTabIndex = index;
 
-                    if (item.dynamicComponent) {
-                        return true;
-                    }
-
-                    if (item.on) {
-                        this.availableTabItem[index]['on'] = item.on;
-                    }
-
-                    item.component().then(moduleRes => {
-                        
-                        // setTimeout测试效果
-                        setTimeout(() => {
-
-                            // 更新异步请求获取的动态组件，并触发视图更新
-                            this.$set(this.availableTabItem[index], 'dynamicComponent', moduleRes.default);
-
-                            return true;
-                        }, 600);
-                    });
+                    return true;
                 }
-            })
+            });
+
+            let activeTabItem = this.availableTabItem[activeTabIndex];
+
+            // 避免重复Tab切换过程导致组件重新加载渲染
+            if (activeTabItem.dynamicComponent) {
+                return;
+            }
+
+            activeTabItem.component().then(moduleRes => {
+                
+                // 异步加载效果演示
+                setTimeout(() => {
+
+                    // 更新异步请求获取的动态组件，并触发视图更新
+                    this.$set(this.availableTabItem[activeTabIndex], 'dynamicComponent', moduleRes.default);
+
+                    return true;
+                }, 600);
+            });
         }
     },
 
@@ -102,7 +114,6 @@ export default {
     }
 }
 </script>
-
 
 <style>
 

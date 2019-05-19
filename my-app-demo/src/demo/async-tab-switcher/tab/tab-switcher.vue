@@ -16,6 +16,7 @@
                 v-on="item.on"
                 v-if="item.dynamicComponent">
 
+                <!-- slot转换 -->
                 <div :slot="slotName" v-for="slotName in item.slot" :key="slotName">
                     <slot :name="slotName"></slot>
                 </div>
@@ -66,7 +67,10 @@ export default {
         },
 
         /**
-         * initActiveTab
+         * 
+         * 更新当前Tab
+         * @method initActiveTab
+         * @param {String} id - Tab id
          */
         initActiveTab (id) {
             let activeTabIndex = 0;

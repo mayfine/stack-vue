@@ -115,25 +115,22 @@ export default {
 }
 </script>
 
-<style>
 
-ul {
-    margin: 0;
-    padding: 0;
-}
+<style lang="scss" scoped>
+.tab-container {
+    .header {
+        display: inline-block;
+        overflow: hidden;
 
-.tab-container .header {
-    display: inline-block;
-    overflow: hidden;
-}
-
-.tab-container .header li {
-    list-style: none;
-    float: left;
-    padding: 10px 20px;
-    color: #666;
-    background: #eee;
-    cursor: pointer;
+        li {
+            list-style: none;
+            float: left;
+            padding: 10px 20px;
+            color: #666;
+            background: #eee;
+            cursor: pointer;
+        }
+    }
 }
 
 .tab-container .header li.active {

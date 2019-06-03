@@ -20,6 +20,11 @@ export default new Router({
       path: '/async-tab-switcher',
       name: 'async-tab-switcher',
       component: () => import('@/demo/async-tab-switcher/index.vue')
+    },
+    {
+      path: '/list-render-test',
+      name: 'list-render-test',
+      component: () => import('@/demo/list-render-test/index.vue')
     }
   ]
 })

@@ -1,6 +1,6 @@
 <template>
     <div class="async-tab-switcher-demo">
-        <tab-switcher :tab-config="tabItems">
+        <tab-switcher :tab-config="tabItems" :active.sync="activeTab">
 
             <!-- 
                 注：
@@ -24,9 +24,11 @@ export default {
 
     data () {
         return {
+            activeTab: 'sz',
             tabItems: [{
                 id: 'gz',
                 name: '广州',
+                keepAlive: false,
                 props: {
                     a: 1
                 },
@@ -49,6 +51,7 @@ export default {
             }, {
                 id: 'fs',
                 name: '佛山',
+                disabled: true,
                 props: {
                     c: 3
                 },
@@ -67,7 +70,7 @@ export default {
          * 异步组件事件绑定测试
          */
         tabClick (text) {
-            console.log(text);
+            alert(text);
         }
     }
 }
